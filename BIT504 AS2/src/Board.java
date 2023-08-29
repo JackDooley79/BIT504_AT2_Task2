@@ -1,9 +1,9 @@
 import java.awt.*;
 
 public class Board {
-	// grid line width constant
+	// grid line width
 	public static final int GRID_WIDTH = 8;
-	// grid line half width constant
+	// grid line half width
 	public static final int GRID_WIDHT_HALF = GRID_WIDTH / 2;
 	
 	//2D array of ROWS-by-COLS Cell instances
@@ -11,13 +11,12 @@ public class Board {
 	
 	/** Constructor to create the game board */
 	public Board() {
-		 // Initialize the cells array using ROWS and COLS constants from GameMain class.
+		 // initialise the cells array using ROWS and COLS constants 
         cells = new Cell[GameMain.ROWS][GameMain.COLS]; // Initialize the cells array
 		
      // Fill the cells array with Cell instances
         for (int row = 0; row < GameMain.ROWS; ++row) {
             for (int col = 0; col < GameMain.COLS; ++col) {
-                // Create a new Cell instance at the specified row and column
                 cells[row][col] = new Cell(row, col);
             }
         }
@@ -30,14 +29,12 @@ public class Board {
 		// Check if there are any empty cells left
         for (int row = 0; row < GameMain.ROWS; ++row) {
             for (int col = 0; col < GameMain.COLS; ++col) {
-                // If any cell is empty, it's not a draw yet
                 if (cells[row][col].content == Player.Empty) {
                     return false; // Not a draw
                 }
             }
         }
-        // All cells are filled, so it's a draw
-        return true; 
+        return true; // It's a draw
     }
 		
 	
@@ -58,26 +55,26 @@ public class Board {
 		//  Check the diagonal from top right to bottom left
 		if (playerRow + playerCol == 2 && cells[0][2].content == thePlayer && cells[1][1].content == thePlayer && cells[2][0].content == thePlayer) {
 	            return true;
-	        }		
-		//if no winner condition, return false and keep playing
+	        }
+
+		
+		//no winner, keep playing
 		return false;
 	}
 	
 	/**
-	 * Draws the grid (rows then columns) using constant sizes, then calls on the
+	 * Draws the grid (rows then columns) using constant sizes, then call on the
 	 * Cells to paint themselves into the grid
 	 */
 	public void paint(Graphics g) {
-	    // Set the color for drawing the grid lines
+		//draw the grid
 		g.setColor(Color.gray);
-		for (int row = 1; row < GameMain.ROWS; ++row) {
-            // Drawing horizontal grid lines
+		for (int row = 1; row < GameMain.ROWS; ++row) {          
 			g.fillRoundRect(0, GameMain.CELL_SIZE * row - GRID_WIDHT_HALF,                
 					GameMain.CANVAS_WIDTH - 1, GRID_WIDTH,                
 					GRID_WIDTH, GRID_WIDTH);       
 			}
-		for (int col = 1; col < GameMain.COLS; ++col) { 
-            // Draw vertical grid lines
+		for (int col = 1; col < GameMain.COLS; ++col) {          
 			g.fillRoundRect(GameMain.CELL_SIZE * col - GRID_WIDHT_HALF, 0,                
 					GRID_WIDTH, GameMain.CANVAS_HEIGHT - 1,                
 					GRID_WIDTH, GRID_WIDTH);
@@ -85,8 +82,7 @@ public class Board {
 		
 		//Draw the cells
 		for (int row = 0; row < GameMain.ROWS; ++row) {          
-			for (int col = 0; col < GameMain.COLS; ++col) { 
-                // Ask each cell from the GameMain's associated board  to paint itself on the grid
+			for (int col = 0; col < GameMain.COLS; ++col) {  
 				cells[row][col].paint(g);
 			}
 		}
