@@ -3,7 +3,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
-// TODO: investigate serializing the class with the next experiment
 
 public class GameMain extends JPanel implements MouseListener{
 	//Constants for game 
